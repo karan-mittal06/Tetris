@@ -31,11 +31,47 @@ void Grid::Draw() {
     }
 }
 
-bool Grid::IsCellOutside(vector <Position> tiles){
-    for(auto item: tiles){
-        if(!(item.row >= 0 && item.row < numRows && item.column >= 0 && item.column < numColumns)){
-            return true;
-        }
+bool Grid::IsCellOutside(int row, int column){
+    return (row < 0 || row >= numRows || column < 0 || column >= numColumns);
+}
+
+bool Grid::IsCellEmpty(int row, int column){
+    if(grid[row][column] == 0){
+        return true;
     }
     return false;
+}
+
+bool Grid::IsRowFull(int row){
+    for(int col = 0; col < numColumns; col++){
+        if(grid[row][col] == 0) return false;
+    }
+    return true;
+}
+
+void Grid::ClearRow(int row){
+    for(int col = 0; col < numColumns; col++){
+        grid[row][col] = 0;
+    }
+}
+
+void Grid::MoveRowDown(int row, int upRows){
+    for(int col = 0; col < numColumns; col++){
+        grid[row+upRows][col] = grid[row][col];
+        grid[row][col] = 0;
+    }
+}
+
+int Grid::ClearFullRows(){
+    int completed = 0;
+    for(int row = numRows - 1; row >= 0; row--){
+        if(IsRowFull(row)){
+            ClearRow(row);
+            completed++;
+        }
+        else if(completed > 0){
+            MoveRowDown(row, completed);
+        }
+    }
+    return completed;
 }

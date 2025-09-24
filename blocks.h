@@ -13,6 +13,8 @@ public:
     void Draw();
     void Move(int row, int column);
     vector <Position> GetCellPosition();
+    void Rotate();
+    void UndoRotate();
 
 private:
     int cellSize;

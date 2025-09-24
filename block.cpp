@@ -23,14 +23,29 @@ void Block::Move(int row, int column){
     columnOffset += column;
 }
 
-vector <Position> Block::GetCellPosition(){
-    vector <Position> tiles = cells[rotationState];
-    vector <Position> movedTiles;
-    for(auto item: tiles){
-        Position newPos = Position(item.row + rowOffset, item.column + columnOffset);
+vector<Position> Block::GetCellPosition() {
+    vector<Position> tiles = cells[rotationState];
+    vector<Position> movedTiles;
+    for (auto item : tiles) {
+        Position newPos(item.row + rowOffset, item.column + columnOffset);
         movedTiles.push_back(newPos);
     }
-    rowOffset = 0;
-    columnOffset = 0;
     return movedTiles;
+}
+
+
+void Block::Rotate(){
+    rotationState ++;
+
+    if(rotationState == (int) cells.size()){
+        rotationState = 0;
+    }
+}
+
+void Block::UndoRotate(){
+    rotationState--;
+
+    if(rotationState == -1){
+        rotationState = cells.size() - 1;
+    }
 }

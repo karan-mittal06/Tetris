@@ -14,11 +14,16 @@ public:
     void MoveRight();
     void MoveUp();
     void MoveDown();
-    bool IsBlockOutside();
     Grid grid;
+    bool gameOver;
 
 private:
     vector <Block> blocks;
     Block currentblock;
     Block nextblock;
+    void LockBlock();
+    bool IsBlockOutside();
+    void RotateBlock();
+    bool BlockFits();
+    void Reset();
 };
