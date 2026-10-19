@@ -136,6 +136,10 @@ void Game::MoveDown(){
     }
 }
 
+void Game::MoveUp(){
+    if(!gameOver) RotateBlock();
+}
+
 void Game::LockBlock(){
     for(const auto item: currentblock.GetCellPosition()){
         grid.grid[item.row][item.column] = currentblock.id;
