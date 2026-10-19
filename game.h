@@ -16,12 +16,19 @@ public:
     void MoveDown();
     Grid grid;
     bool gameOver;
+    int score;
+    int level;
+    int totalLines;
 
 private:
     vector <Block> blocks;
     Block currentblock;
     Block nextblock;
     void LockBlock();
+    void UpdateScore(int clearedLines);
+    void UpdateLevel();
+    void DrawStats();
+    void DrawGameOverScreen();
     bool IsBlockOutside();
     void RotateBlock();
     bool BlockFits();
